@@ -1,6 +1,9 @@
 package uaslp.objetos.list.arraylist;
 
-public class ArrayList {
+import uaslp.objetos.list.Iterator;
+import uaslp.objetos.list.List;
+
+public class ArrayList implements List {
     private static final int DEFAULT_SIZE = 50;
     private String[] array;
     private int size;
@@ -13,6 +16,7 @@ public class ArrayList {
         array = new String[size];
     }
 
+    @Override
     public void addAtTail(String data) {
         if (size == array.length) {
             increaseArraySize();
@@ -21,6 +25,7 @@ public class ArrayList {
         size++;
     }
 
+    @Override
     public void addAtFront(String data) {
         if (size == array.length) {
             increaseArraySize();
@@ -34,6 +39,7 @@ public class ArrayList {
         size++;
     }
 
+    @Override
     public void remove(int index) {
         if (index < 0 || index >= size) {
             return;
@@ -46,6 +52,7 @@ public class ArrayList {
         size--;
     }
 
+    @Override
     public void removeAll() {
         for (int i = 0; i < size; i++) {
             array[i] = null;
@@ -53,6 +60,7 @@ public class ArrayList {
         size = 0;
     }
 
+    @Override
     public void setAt(int index, String data) {
         if (index >= 0 && index < size) {
             array[index] = data;
@@ -63,6 +71,8 @@ public class ArrayList {
      * @param index 0-index
      * @return element at position index
      */
+
+    @Override
     public String getAt(int index) {
         if (index >= 0 && index < size) {
             return array[index];
@@ -71,10 +81,12 @@ public class ArrayList {
         }
     }
 
-    public ArrayListIterator getIterator() {
+    @Override
+    public Iterator getIterator() {
         return new ArrayListIterator(this);
     }
 
+    @Override
     public int getSize() {
         return size;
     }
