@@ -9,12 +9,12 @@ public class Main {
 
     public static void main(String[] args){
 
-        metodo(new ArrayList(), new ArrayList(), new ArrayList());
-        metodo(new LinkedList(), new LinkedList(), new LinkedList());
+        metodo(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
+        metodo(new LinkedList<>(), new LinkedList<>(), new LinkedList<>());
 
     }
 
-    public static void metodo(List team1, List team2, List team3) {
+    public static void metodo(List<String> team1, List<String> team2, List<String> team3) {
 
         team1.addAtTail("Jesus");
         team1.addAtTail("Salomon");
@@ -26,7 +26,7 @@ public class Main {
 
         team3.addAtFront("Imelda");
 
-        Iterator iterator;
+        Iterator<String> iterator;
 
         iterator = team1.getIterator();
 
