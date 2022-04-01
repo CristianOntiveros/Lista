@@ -2,6 +2,8 @@ import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
 import uaslp.objetos.list.arraylist.ArrayList;
 import uaslp.objetos.list.arraylist.ArrayListIterator;
+import uaslp.objetos.list.exception.NotNullValuesAllowedException;
+import uaslp.objetos.list.exception.NotValidIndexException;
 import uaslp.objetos.list.linkedlist.LinkedList;
 import uaslp.objetos.list.linkedlist.LinkedListIterator;
 
@@ -9,12 +11,26 @@ public class Main {
 
     public static void main(String[] args){
 
-        metodo(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
-        metodo(new LinkedList<>(), new LinkedList<>(), new LinkedList<>());
+        List<String> team1=new LinkedList<>();
+        List<String> team2=new LinkedList<>();
+        List<String> team3=new LinkedList<>();
+
+        try {
+            metodo(team1, team2, team3);
+        }catch (NotValidIndexException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }catch (NotNullValuesAllowedException ex){
+            System.out.println("Error: " + ex.getMessage());
+        }
+        //System.out.println("El programa no ha fallado");
 
     }
 
-    public static void metodo(List<String> team1, List<String> team2, List<String> team3) {
+    public static void metodo(List<String> team1, List<String> team2, List<String> team3) throws NotValidIndexException, NotNullValuesAllowedException {
+
+        //team1.remove(5);
+
+        team1.setAt(1,null);
 
         team1.addAtTail("Jesus");
         team1.addAtTail("Salomon");
@@ -51,8 +67,11 @@ public class Main {
         // Diego
         // Daniel
         // Cristian
-
-        team1.remove(0);
+        try{
+            team1.remove(0);
+        }catch(Exception ex){
+            System.out.println("No se pudo eliminar: " + ex.getMessage());
+        }
         team1.addAtFront("Rebeca");
         System.out.println("Team 1 tiene: " + team1.getSize() + " integrantes"); // debe imprimir "Team 1 tiene 3 integrantes"
 
