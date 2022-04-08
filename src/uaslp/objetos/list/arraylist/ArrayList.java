@@ -2,9 +2,11 @@ package uaslp.objetos.list.arraylist;
 
 import uaslp.objetos.list.Iterator;
 import uaslp.objetos.list.List;
+import uaslp.objetos.list.exception.NotNullValuesAllowedException;
+import uaslp.objetos.list.exception.NotValidIndexException;
 
 public class ArrayList <T> implements List<T> {
-    private static final int DEFAULT_SIZE = 50;
+    private static final int DEFAULT_SIZE = 1;
     private T[] array;
     private int size;
 
@@ -17,18 +19,29 @@ public class ArrayList <T> implements List<T> {
     }
 
     @Override
-    public void addAtTail(T data) {
-        if (size == array.length) {
-            increaseArraySize();
+    public void addAtTail(T data) throws NotNullValuesAllowedException{
+
+        if(data==null){
+            throw new NotNullValuesAllowedException();
         }
+
+        if (size == array.length) {
+            increaseArrayList();
+        }
+
         array[size] = data;
         size++;
     }
 
     @Override
-    public void addAtFront(T data) {
+    public void addAtFront(T data) throws NotNullValuesAllowedException{
+
+        if(data==null){
+            throw new NotNullValuesAllowedException();
+        }
+
         if (size == array.length) {
-            increaseArraySize();
+            increaseArrayList();
         }
 
         if (size >= 0) {
@@ -40,7 +53,7 @@ public class ArrayList <T> implements List<T> {
     }
 
     @Override
-    public void remove(int index) {
+    public void remove(int index){
         if (index < 0 || index >= size) {
             return;
         }
@@ -61,7 +74,12 @@ public class ArrayList <T> implements List<T> {
     }
 
     @Override
-    public void setAt(int index, T data) {
+    public void setAt(int index, T data) throws NotNullValuesAllowedException {
+
+        if(data == null){
+            throw new NotNullValuesAllowedException();
+        }
+
         if (index >= 0 && index < size) {
             array[index] = data;
         }
@@ -74,11 +92,7 @@ public class ArrayList <T> implements List<T> {
 
     @Override
     public T getAt(int index) {
-        if (index >= 0 && index < size) {
-            return array[index];
-        } else {
-            return null;
-        }
+        return index >= 0 && index < size ? array[index] : null;
     }
 
     @Override
@@ -91,12 +105,12 @@ public class ArrayList <T> implements List<T> {
         return size;
     }
 
-    private void increaseArraySize() {
-        T[] newArray = (T[]) new Object[array.length * 2];
-        for (int i = 0; i < size; i++) {
-            newArray[i] = array[i];
+    private void increaseArrayList(){
+        T []newArray = (T[])new Object[array.length * 2];
+        for(int i=0;i<size;i++){
+            newArray[i]=array[i];
         }
-        array = newArray;
+        array=newArray;
     }
 
 }

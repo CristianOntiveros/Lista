@@ -29,8 +29,7 @@ public class Main {
     public static void metodo(List<String> team1, List<String> team2, List<String> team3) throws NotValidIndexException, NotNullValuesAllowedException {
 
         //team1.remove(5);
-
-        team1.setAt(1,null);
+        //team1.setAt(1,null);
 
         team1.addAtTail("Jesus");
         team1.addAtTail("Salomon");
